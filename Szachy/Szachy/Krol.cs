@@ -8,25 +8,25 @@ namespace Szachy
 {
     class Krol : Figura
     {
-        public Krol(object x, int y, int kolor) : base(x, y, kolor)
+        public Krol(char x, int y, Kolory kolor) : base(x, y, kolor)
         {
             nazwa = "Król";
         }
 
-        public override bool MozeRuszyc(object _x, int y)
+        public override bool MozeRuszyc(char x, int y)
         {
-            int x = ConvertPosition(_x);
+            int liczbaX = ConvertPosition(x);
 
             if (!base.MozeRuszyc(x, y))
             {
                 return false;
             }
 
-            int posX = GetX();
-            int posY = GetY();
+            int pozycjaX = liczbaX;
+            int pozycjaY = y;
 
-            int diffY = Math.Abs(y - posY);
-            int diffX = Math.Abs(x - posX);
+            int diffY = Math.Abs(Y - pozycjaY);
+            int diffX = Math.Abs(ConvertPosition(X) - pozycjaX);
 
             if (diffX == 1 && diffY == 1)
             {

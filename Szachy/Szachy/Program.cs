@@ -9,11 +9,13 @@ namespace Szachy
     class Szachy
     {
         static void Main(string[] args)
-        {   
-            Figura wieza = new Wieza('C', 6, 1);
-            Figura hetman = new Hetman('F', 5, 1);
-            Figura goniec = new Goniec('D', 3, 0);
-            Figura krol = new Krol('F', 2, 0);
+        {
+
+            
+            Figura wieza = new Wieza('C', 6, Figura.Kolory.Black);
+            Figura hetman = new Hetman('F', 5, Figura.Kolory.Black);
+            Figura goniec = new Goniec('D', 3, Figura.Kolory.White);
+            Figura krol = new Krol('F', 2, Figura.Kolory.White);
 
             Console.WriteLine("Czarna wieża może ruszyć z C6 na H6: {0}", (wieza.MozeRuszyc('H', 6)));
             Console.WriteLine("Czarna wieża może ruszyć z C6 na C3: {0}", (wieza.MozeRuszyc('C', 3)));
@@ -33,6 +35,15 @@ namespace Szachy
             Console.WriteLine("Biały król może ruszyć z F2 na G2: {0}", (krol.MozeRuszyc('G', 2)));
             Console.WriteLine("Biały król może ruszyć z F2 na F1: {0}", (krol.MozeRuszyc('F', 1)));
             Console.WriteLine("Biały król może ruszyć z F2 na D4: {0}", (krol.MozeRuszyc('D', 4)));
+
+
+            Szachownica plansza = new Szachownica();
+
+            plansza['D', 6] = wieza.ToString();
+            plansza['E', 2] = hetman.ToString();
+            plansza['F', 2] = goniec.ToString();
+            plansza['C', 4] = krol.ToString();
+            plansza.WyliczSzachownica();
 
             Console.ReadKey();
         }

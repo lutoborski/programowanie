@@ -4,50 +4,69 @@ namespace Szachy
 {
     abstract class Figura
         {
-            public enum Kolory : int
+            public enum Kolory
             {
-                White = 0,
-                Black = 1
+                White,
+                Black
             };
 
             public string nazwa;
-            public int x;
+            public char x;
             public int y;
-            public int kolor;
-
-        public Figura(object _x, int y, int kolor)
+            public Kolory kolor;
+        public char X
         {
-            int x = ConvertPosition(_x);
-
-            SetPozycja(x, y);
-            SetKolor(kolor);
+            get { return x; }
+            set { x = value; }
         }
 
-        public int GetX()
+        public int Y
         {
-            return x;
+            get { return y; }
+            set { y = value; }
         }
 
-        public int GetY()
+        public Kolory Kolor
         {
-            return y;
+            get { return kolor; }
+            set { kolor = value; }
         }
 
-        public void SetPozycja(int x, int y)
+        public string NazwaFigury
         {
-            this.x = x;
-            this.y = y;
+            get { return nazwa; }
+            set { nazwa = value; }
         }
 
-        public void SetKolor(int kolor)
+        public Figura(char x, int y, Kolory kolor)
         {
-            this.kolor = kolor;
-        }
-        public virtual bool MozeRuszyc(object _x, int y)
-        {
-            int x = ConvertPosition(_x);
+            X = x;
+            Y = y;
+            Kolor = kolor;
 
-            if (x > 8 || x < 1 || y > 8 || y < 1)
+        }
+
+        public string GetPozycjaString()
+        {
+            return $"{X}{Y}";
+
+        }
+
+        public string GetKolorString()
+        {
+            return Enum.GetName(typeof(Kolory), Kolor);
+        }
+
+
+        public override string ToString()
+        {
+            return $"Figura: {NazwaFigury}, kolor: {GetKolorString()}, pozycja: {GetPozycjaString()}";
+        }
+        public virtual bool MozeRuszyc(char x, int y)
+        {
+            int liczbaX = ConvertPosition(x);
+
+            if ((liczbaX < 1 || liczbaX > 8) || (y < 1 || y > 8))
             {
                 return false;
             }
@@ -60,20 +79,14 @@ namespace Szachy
             return true;
         }
 
-        public int ConvertPosition(object pos)
+        public int ConvertPosition(char position)
         {
-            if (pos is char)
-            {
-                return (int)Char.ToUpper(Convert.ToChar(pos)) - 64;
-            }
-
-            return Convert.ToInt32(pos);
+            return (int)Char.ToUpper(position) - 64;
         }
 
         public bool IsEqualPosition(int x, int y)
         {
-            return GetX() == x && GetY() == y;
+            return X == x && Y == y;
         }
-
     }
 }
