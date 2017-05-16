@@ -66,7 +66,7 @@ namespace Szachy
             }
         }
     }
-        public static class SzachownicaRozszerzenie
+        public static class ZliczanieFigur
         {
             public static int LiczbaFigur (this Szachownica szach)
             {
