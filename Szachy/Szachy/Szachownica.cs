@@ -6,41 +6,81 @@ using System.Threading.Tasks;
 
 namespace Szachy
 {
-    sealed class Szachownica
+    public sealed class Szachownica
     {
-        private string[,] plansza;
-    
-        public Szachownica()
-        {
-            plansza = new string[8, 8];
-        }
+        private static Szachownica szachownica = new Szachownica();
 
-        public string this[char x, int y]
+        public static Szachownica Szach
         {
             get
             {
-                return plansza[x - 65, y];
+                return szachownica;
+            }
+        }
+
+        private const int WielkoscSzachownicy = 8;
+
+        private string[,] plansza;
+
+        public string[,] Plansza
+        {
+            get
+            {
+                return plansza;
+            }
+        }
+
+        static Szachownica() { }
+
+        private Szachownica()
+        {
+            plansza = new string[WielkoscSzachownicy, WielkoscSzachownicy];
+        }
+
+        public string this[Figura figura, char x, int y]
+        {
+            get
+            {
+                return Plansza[x - 65, y];
             }
             set
             {
-                plansza[x - 65, y] = value;
+                Plansza[x - 65, y] = value;
+                figura.X = x;
+                figura.Y = y;
             }
         }
-        public void WyliczSzachownica()
+        public void PokazSzachownice()
         {
-            int maks = (int)Math.Sqrt(plansza.Length);
+            int limit = WielkoscSzachownicy;
 
-            for (int a = 0; a < maks; a++)
+            for (int i = 0; i < limit; i++)
             {
-                for (int b = 0; b < maks; b++)
+                for (int j = 0; j < limit; j++)
                 {
-                    if (!string.IsNullOrEmpty(plansza[a, b]))
+                    if (!string.IsNullOrEmpty(plansza[i, j]))
                     {
-                        Console.WriteLine(plansza[a, b]);
+                        Console.WriteLine(plansza[i, j]);
                     }
                 }
             }
         }
-
     }
+        public static class SzachownicaRozszerzenie
+        {
+            public static int LiczbaFigur (this Szachownica szach)
+            {
+                string[,] array = szach.Plansza;
+                int count = 0;
+                foreach (var s in array)
+                {
+                    if (!string.IsNullOrEmpty(s))
+                    {
+                        count++;
+                    }
+                }
+
+                return count;
+            }
+        }
     }

@@ -42,6 +42,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Ruch.cs" />
     <Compile Include="Szachownica.cs" />
     <Compile Include="Hetman.cs" />
     <Compile Include="Krol.cs" />

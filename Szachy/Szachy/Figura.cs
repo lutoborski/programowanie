@@ -2,28 +2,40 @@
 
 namespace Szachy
 {
-    abstract class Figura
+    public enum NazwaFigury
+    {
+        Goniec,
+        Wieża,
+        Król,
+        Hetman
+    }
+    public enum Kolory
+    {
+        White,
+        Black
+    };
+    public abstract class Figura
         {
-            public enum Kolory
-            {
-                White,
-                Black
-            };
-
             public string nazwa;
             public char x;
             public int y;
             public Kolory kolor;
+            public delegate void Delegata();
+            public event Delegata Zdarzenie;
         public char X
         {
             get { return x; }
-            set { x = value; }
+            set { x = value;
+                if (Zdarzenie != null) Zdarzenie();
+            }
         }
 
         public int Y
         {
             get { return y; }
-            set { y = value; }
+            set { y = value;
+               if (Zdarzenie != null) Zdarzenie();
+            }
         }
 
         public Kolory Kolor
@@ -60,7 +72,7 @@ namespace Szachy
 
         public override string ToString()
         {
-            return $"Figura: {NazwaFigury}, kolor: {GetKolorString()}, pozycja: {GetPozycjaString()}";
+            return $"Figura: {NazwaFigury}, kolor: {GetKolorString()}, pozycja: {GetPozycjaString()}, została przesunięta.";
         }
         public virtual bool MozeRuszyc(char x, int y)
         {

@@ -10,42 +10,22 @@ namespace Szachy
     {
         static void Main(string[] args)
         {
+            Szachownica szachownica = Szachownica.Szach;
 
-            
-            Figura wieza = new Wieza('C', 6, Figura.Kolory.Black);
-            Figura hetman = new Hetman('F', 5, Figura.Kolory.Black);
-            Figura goniec = new Goniec('D', 3, Figura.Kolory.White);
-            Figura krol = new Krol('F', 2, Figura.Kolory.White);
-
-            Console.WriteLine("Czarna wieża może ruszyć z C6 na H6: {0}", (wieza.MozeRuszyc('H', 6)));
-            Console.WriteLine("Czarna wieża może ruszyć z C6 na C3: {0}", (wieza.MozeRuszyc('C', 3)));
-            Console.WriteLine("Czarna wieża może ruszyć z C6 na E4: {0}", (wieza.MozeRuszyc('E', 4)));
-
-            Console.WriteLine("Czarny hetman może ruszyć z F5 na H5: {0}", (hetman.MozeRuszyc('H', 5)));
-            Console.WriteLine("Czarny hetman może ruszyć z F5 na F2: {0}", (hetman.MozeRuszyc('F', 2)));
-            Console.WriteLine("Czarny hetman może ruszyć z F5 na C8: {0}", (hetman.MozeRuszyc('C', 8)));
-            Console.WriteLine("Czarny hetman może ruszyć z F5 na C4: {0}", (hetman.MozeRuszyc('C', 4)));
-
-            Console.WriteLine("Biały goniec może ruszyć z D3 na B1: {0}", (goniec.MozeRuszyc('B', 1)));
-            Console.WriteLine("Biały goniec może ruszyć z D3 na F5: {0}", (goniec.MozeRuszyc('F', 5)));
-            Console.WriteLine("Biały goniec może ruszyć z D3 na G2: {0}", (goniec.MozeRuszyc('G', 2)));
-            Console.WriteLine("Biały goniec może ruszyć z D3 na D6: {0}", (goniec.MozeRuszyc('D', 6)));
-
-            Console.WriteLine("Biały król może ruszyć z F2 na E3: {0}", (krol.MozeRuszyc('E', 3)));
-            Console.WriteLine("Biały król może ruszyć z F2 na G2: {0}", (krol.MozeRuszyc('G', 2)));
-            Console.WriteLine("Biały król może ruszyć z F2 na F1: {0}", (krol.MozeRuszyc('F', 1)));
-            Console.WriteLine("Biały król może ruszyć z F2 na D4: {0}", (krol.MozeRuszyc('D', 4)));
+            Figura Król = Ruch.inst(NazwaFigury.Król, 'C', 4, Kolory.White);
+            Figura Wieża = Ruch.inst(NazwaFigury.Wieża, 'D', 7, Kolory.Black);
+            Figura Hetman = Ruch.inst(NazwaFigury.Hetman, 'G', 3, Kolory.White);
+            Figura Goniec = Ruch.inst(NazwaFigury.Goniec, 'G', 6, Kolory.Black);
 
 
-            Szachownica plansza = new Szachownica();
-
-            plansza['D', 6] = wieza.ToString();
-            plansza['E', 2] = hetman.ToString();
-            plansza['F', 2] = goniec.ToString();
-            plansza['C', 4] = krol.ToString();
-            plansza.WyliczSzachownica();
+            szachownica[Król, 'D', 5] = Król.ToString();
+            szachownica[Wieża, 'G', 7] = Wieża.ToString();
+            szachownica[Hetman, 'A', 2] = Hetman.ToString();
+            szachownica[Goniec, 'B', 3] = Goniec.ToString();
+            szachownica.PokazSzachownice();
+            Console.WriteLine("Na szachownicy znajdują się " + szachownica.LiczbaFigur() + " figury.");
 
             Console.ReadKey();
         }
     }
-}
+    }
